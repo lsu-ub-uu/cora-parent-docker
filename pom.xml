@@ -27,7 +27,7 @@
 
 	<artifactId>cora-parent-docker</artifactId>
 	<packaging>pom</packaging>
-	<version>1.1.0</version>
+	<version>1.1.1-SNAPSHOT</version>
 	<name>Cora parent for docker</name>
 
 	<properties>
@@ -44,7 +44,7 @@
 		<developerConnection>
 			scm:git:https://github.com/lsu-ub-uu/cora-parent-docker.git</developerConnection>
 		<url>https://github.com/lsu-ub-uu/cora-parent-docker.git</url>
-		<tag>cora-parent-docker-1.1.0</tag>
+		<tag>release/1.1</tag>
 	</scm>
 
 	<profiles>
