@@ -1,0 +1,293 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ~ Copyright 2015, 2018, 2019 Uppsala University Library ~ ~ This file 
+	is part of Cora. ~ ~ Cora is free software: you can redistribute it and/or 
+	modify ~ it under the terms of the GNU General Public License as published 
+	by ~ the Free Software Foundation, either version 3 of the License, or ~ 
+	(at your option) any later version. ~ ~ Cora is distributed in the hope that 
+	it will be useful, ~ but WITHOUT ANY WARRANTY; without even the implied warranty 
+	of ~ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the ~ GNU General 
+	Public License for more details. ~ ~ You should have received a copy of the 
+	GNU General Public License ~ along with Cora. If not, see <http://www.gnu.org/licenses />. -->
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>se.uu.ub.cora</groupId>
+	<artifactId>cora-parent</artifactId>
+	<version>2.8-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<name>Cora Parent</name>
+	<description>Cora Parent POM</description>
+
+	<properties>
+		<java.release.version>23</java.release.version>
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
+		<maven.required.version>3.3.9</maven.required.version>
+
+		<dockerfile-maven-plugin.version>1.4.13</dockerfile-maven-plugin.version>
+		<activation.version>1.1.1</activation.version>
+
+		<maven-assembly-plugin.version>3.7.1</maven-assembly-plugin.version>
+		<maven-compiler-plugin.version>3.13.0</maven-compiler-plugin.version>
+		<maven-failsafe-plugin.version>3.5.2</maven-failsafe-plugin.version>
+		<maven-release-plugin.version>3.1.1</maven-release-plugin.version>
+		<maven-resources-plugin.version>3.3.1</maven-resources-plugin.version>
+		<maven-source-plugin.version>3.3.1</maven-source-plugin.version>
+		<maven-surefire-plugin.version>3.5.2</maven-surefire-plugin.version>
+		<maven-clean-plugin.version>3.4.0</maven-clean-plugin.version>
+		<maven-deploy-plugin.version>3.1.3</maven-deploy-plugin.version>
+		<maven-enforcer-plugin.version>3.5.0</maven-enforcer-plugin.version>
+		<maven-install-plugin.version>3.1.3</maven-install-plugin.version>
+		<maven-site-plugin.version>3.21.0</maven-site-plugin.version>
+		<maven-war-plugin.version>3.4.0</maven-war-plugin.version>
+
+		<testng.version>7.10.2</testng.version>
+
+		<jacoco.version>0.8.12</jacoco.version>
+
+		<sonar-java-plugin.version>8.8.0.37665</sonar-java-plugin.version>
+		<sonar-maven-plugin.version>5.0.0.4389</sonar-maven-plugin.version>
+
+		<pitest-maven.version>1.17.4</pitest-maven.version>
+		<pitest-testng-plugin.version>1.0.0</pitest-testng-plugin.version>
+
+	</properties>
+	<scm>
+		<connection>scm:git:https://github.com/lsu-ub-uu/cora-parent.git</connection>
+		<developerConnection>scm:git:https://github.com/lsu-ub-uu/cora-parent.git</developerConnection>
+		<url>https://github.com/lsu-ub-uu/cora-parent.git</url>
+		<tag>HEAD</tag>
+	</scm>
+	<distributionManagement>
+		<repository>
+			<id>epc-release</id>
+			<name>EPC Releases</name>
+			<url>http://epc.ub.uu.se/nexus/repository/epc-release</url>
+		</repository>
+		<snapshotRepository>
+			<id>epc-snapshot</id>
+			<name>Internal Snapshots</name>
+			<url>http://epc.ub.uu.se/nexus/repository/epc-snapshot</url>
+		</snapshotRepository>
+	</distributionManagement>
+	<build>
+		<finalName>cora-${project.artifactId}-${project.version}</finalName>
+		<pluginManagement>
+			<plugins>
+				<!-- Maven life-cycle plugins -->
+				<plugin>
+					<artifactId>maven-clean-plugin</artifactId>
+					<version>${maven-clean-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-deploy-plugin</artifactId>
+					<version>${maven-deploy-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-install-plugin</artifactId>
+					<version>${maven-install-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-site-plugin</artifactId>
+					<version>${maven-site-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>${maven-war-plugin.version}</version>
+				</plugin>
+				<!-- Other plugins -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire-plugin.version}</version>
+					<configuration>
+						<properties>
+							<property>
+								<name>usedefaultlisteners</name>
+								<value>false</value>
+							</property>
+						</properties>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-failsafe-plugin</artifactId>
+					<version>${maven-failsafe-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-assembly-plugin</artifactId>
+					<version>${maven-assembly-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-resources-plugin</artifactId>
+					<version>${maven-resources-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven-compiler-plugin.version}</version>
+				</plugin>
+				<plugin>
+					<groupId>org.sonarsource.scanner.maven</groupId>
+					<artifactId>sonar-maven-plugin</artifactId>
+					<version>${sonar-maven-plugin.version}</version>
+				</plugin>
+				<!-- Docker -->
+				<plugin>
+					<groupId>com.spotify</groupId>
+					<artifactId>dockerfile-maven-plugin</artifactId>
+					<version>${dockerfile-maven-plugin.version}</version>
+					<dependencies>
+						<dependency>
+							<groupId>javax.activation</groupId>
+							<artifactId>activation</artifactId>
+							<version>${activation.version}</version>
+						</dependency>
+					</dependencies>
+					<executions>
+						<execution>
+							<id>default</id>
+							<goals>
+								<goal>build</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<release>${java.release.version}</release>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.pitest</groupId>
+				<artifactId>pitest-maven</artifactId>
+				<version>${pitest-maven.version}</version>
+				<dependencies>
+                    <dependency>
+                        <groupId>org.pitest</groupId>
+                        <artifactId>pitest-testng-plugin</artifactId>
+                        <version>${pitest-testng-plugin.version}</version>
+                    </dependency>
+                </dependencies>
+				<configuration>
+					<testPlugin>testng</testPlugin>
+					<targetClasses>
+						<param>se*</param>
+					</targetClasses>
+					<targetTests>
+						<param>se*</param>
+						1.0-SNAPSHOT
+					</targetTests>
+					<!-- <mutators> -->
+					<!-- <mutator>ALL</mutator> -->
+					<!-- </mutators> -->
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>${maven-release-plugin.version}</version>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>${maven-source-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>attach-sources</id>
+						<phase>verify</phase>
+						<goals>
+							<goal>jar-no-fork</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-enforcer-plugin</artifactId>
+				<version>${maven-enforcer-plugin.version}</version>
+				<executions>
+					<execution>
+						<id>enforce-maven</id>
+						<goals>
+							<goal>enforce</goal>
+						</goals>
+						<configuration>
+							<rules>
+								<requireMavenVersion>
+									<version>${maven.required.version}</version>
+								</requireMavenVersion>
+							</rules>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+	<profiles>
+		<profile>
+			<id>sonar-cora</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.sonarsource.scanner.maven</groupId>
+						<artifactId>sonar-maven-plugin</artifactId>
+						<version>${sonar-maven-plugin.version}</version>
+					</plugin>
+					<plugin>
+						<groupId>org.sonarsource.java</groupId>
+						<artifactId>sonar-java-plugin</artifactId>
+						<version>${sonar-java-plugin.version}</version>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<version>${maven-surefire-plugin.version}</version>
+					</plugin>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-failsafe-plugin</artifactId>
+						<version>${maven-failsafe-plugin.version}</version>
+						<executions>
+							<execution>
+								<goals>
+									<goal>integration-test</goal>
+									<goal>verify</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+					<plugin>
+						<groupId>org.jacoco</groupId>
+						<artifactId>jacoco-maven-plugin</artifactId>
+						<version>${jacoco.version}</version>
+						<executions>
+							<execution>
+								<id>prepare-agent</id>
+								<goals>
+									<goal>prepare-agent</goal>
+								</goals>
+							</execution>
+							<execution>
+								<id>report</id>
+								<goals>
+									<goal>report</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>
