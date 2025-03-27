@@ -34,6 +34,7 @@
 		<outputDirectory>${project.build.directory}/docker2</outputDirectory>
 		<exec-maven-plugin.version>3.5.0</exec-maven-plugin.version>
 		<dockerrepo>docker.epc.ub.uu.se:50443/</dockerrepo>
+		<dockerNameAndVersion>${project.artifactId}:${project.version}</dockerNameAndVersion>
 		<!-- By default, disable docker build in the parent -->
 		<docker.build.activate>false</docker.build.activate>
 	</properties>
@@ -97,8 +98,7 @@
 									<arguments>
 										<argument>build</argument>
 										<argument>-t</argument>
-										<argument>
-											${project.artifactId}:${project.version}</argument>
+										<argument>${dockerNameAndVersion}</argument>
 										<argument>.</argument>
 									</arguments>
 								</configuration>
@@ -113,10 +113,8 @@
 									<executable>docker</executable>
 									<arguments>
 										<argument>tag</argument>
-										<argument>
-											${project.artifactId}:${project.version}</argument>
-										<argument>
-											${dockerrepo}${project.artifactId}:${project.version}</argument>
+										<argument>${dockerNameAndVersion}</argument>
+										<argument>${dockerrepo}${dockerNameAndVersion}</argument>
 									</arguments>
 								</configuration>
 							</execution>
@@ -130,8 +128,7 @@
 									<executable>docker</executable>
 									<arguments>
 										<argument>push</argument>
-										<argument>
-											${dockerrepo}${project.artifactId}:${project.version}</argument>
+										<argument>${dockerrepo}${dockerNameAndVersion}</argument>
 									</arguments>
 								</configuration>
 							</execution>
